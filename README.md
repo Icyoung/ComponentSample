@@ -7,6 +7,11 @@ libService为模块API暴露库，接口回调实现
 
     使用:
         1.定义暴露接口继承IService在公共lib,并在各自模块实现这些接口
+        
+        interface ServiceB: IService{
+              fun testB(callback:(argsFromB: String)-> Unit)
+              fun goB(context: Context, args: String)
+        }
   
         2.在Application中注册接口的实现类
         
