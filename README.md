@@ -7,11 +7,11 @@ libService为模块API暴露库，接口回调实现
 
   使用： 1.定义暴露接口继承IService在公共lib,并在各自模块实现这些接口
   
-        1.在Application中注册接口的实现类
+        2.在Application中注册接口的实现类
         
           ServiceRegistry.register(ServiceAImpl::class.java）
           
-        2.在模块A调用模块B服务
+        3.在模块A调用模块B服务
         
            val serviceB = ServiceProvider.produce(ServiceB::class.java)
            serviceB.testB{argsFromB ->  doSomeThing(argsFromB)}
