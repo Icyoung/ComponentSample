@@ -1,0 +1,1 @@
+include ':app', ':plugA', ':plugB', ':libService', ':libCommon', ':libRouter'
