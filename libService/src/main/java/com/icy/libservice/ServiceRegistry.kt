@@ -6,12 +6,11 @@ object ServiceRegistry{
 
     private val services: SparseArray<IService> by lazy { SparseArray<IService>() }
 
-    fun register(serviceImplClass: Class<out IService>){
-        val service = serviceImplClass.newInstance()
-        val sidKey = ServiceIndex.getKey(serviceImplClass)
+    fun register(serviceImpl: IService){
+        val sidKey = ServiceIndex.getKey(serviceImpl.javaClass)
         val sid = ServiceIndex.autoId()
         if(ServiceIndex[sidKey] == null  && services.get(sid) == null){
-            services.put(sid,service)
+            services.put(sid,serviceImpl)
             ServiceIndex.put(sidKey,sid)
         }else{
             throw RuntimeException("Don't register service $sidKey repeat!")
@@ -19,7 +18,9 @@ object ServiceRegistry{
     }
 
     fun registerArray(vararg serviceImplClasses: Class<out IService>){
-        serviceImplClasses.forEach{ register(it)}
+        serviceImplClasses.map { it.newInstance() }
+            .sortedBy { it.priority }
+            .forEach{ register(it)}
     }
 
     internal fun getService(serviceId: Int): IService {

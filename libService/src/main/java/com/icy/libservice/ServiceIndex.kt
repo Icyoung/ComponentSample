@@ -5,7 +5,7 @@ import kotlin.random.Random
 
 internal object ServiceIndex : ConcurrentHashMap<String, Int>() {
 
-    fun <T: IService> getKey(serviceImplClass: Class<T>): String =
+    fun getKey(serviceImplClass: Class<out IService>): String =
             serviceImplClass.interfaces[0].simpleName
 
     fun autoId(): Int = Random.nextInt(1000).let {
