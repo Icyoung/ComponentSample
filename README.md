@@ -22,4 +22,4 @@ libService为模块API暴露库，接口回调实现
            val serviceB = ServiceProvider.produce(ServiceB::class.java)
            serviceB.testB{argsFromB ->  doSomeThing(argsFromB)}
 
-ps: app为空壳app,plugA、plug为两个不相互依赖的组件、通过接口暴露在libCommon库中，相互调用
+ps: app为空壳app,plugA、plugB为两个不相互依赖的组件、通过接口暴露在libCommon库中，相互调用
